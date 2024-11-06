@@ -1,0 +1,40 @@
+<%- include('layouts/header') %>
+
+<main class="container">
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h2>Tableau de bord</h2>
+            <a href="/chatbot/new" class="btn-primary">Nouveau Chatbot</a>
+        </div>
+
+        <div class="welcome">
+            <h3>Bienvenue, <%= user.username %></h3>
+            <p>Gérez vos chatbots et consultez leurs statistiques</p>
+        </div>
+
+        <% if (locals.chatbots && chatbots.length > 0) { %>
+            <div class="chatbots-grid">
+                <% chatbots.forEach(chatbot => { %>
+                    <div class="chatbot-card">
+                        <div class="chatbot-card-header">
+                            <h4><%= chatbot.name %></h4>
+                            <span class="badge"><%= new Date(chatbot.created_at).toLocaleDateString() %></span>
+                        </div>
+                        <p><%= chatbot.description %></p>
+                        <div class="chatbot-card-actions">
+                            <a href="/chatbot/<%= chatbot.id %>" class="btn-secondary">Configurer</a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <h3>Aucun chatbot</h3>
+                <p>Commencez par créer votre premier chatbot!</p>
+                <a href="/chatbot/new" class="btn-primary">Créer un chatbot</a>
+            </div>
+        <% } %>
+    </div>
+</main>
+
+<%- include('layouts/footer') %>

@@ -1,0 +1,72 @@
+<%- include('../layouts/header') %>
+
+<main class="container">
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h2>Configuration du chatbot</h2>
+        </div>
+
+        <div class="chatbot-config">
+            <div class="config-section">
+                <h3>Paramètres</h3>
+                <form action="/chatbot/<%= chatbot.id %>/update" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nom du chatbot</label>
+                        <input type="text" id="name" name="name" value="<%= chatbot.name %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="3" required><%= chatbot.description %></textarea>
+                    </div>
+
+                    <% const settings = JSON.parse(chatbot.settings) %>
+                    <div class="form-group">
+                        <label for="theme">Thème</label>
+                        <select id="theme" name="theme">
+                            <option value="light" <%= settings.theme === 'light' ? 'selected' : '' %>>Clair</option>
+                            <option value="dark" <%= settings.theme === 'dark' ? 'selected' : '' %>>Sombre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <select id="position" name="position">
+                            <option value="bottom-right" <%= settings.position === 'bottom-right' ? 'selected' : '' %>>Bas droite</option>
+                            <option value="bottom-left" <%= settings.position === 'bottom-left' ? 'selected' : '' %>>Bas gauche</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="welcomeMessage">Message d'accueil</label>
+                        <input type="text" id="welcomeMessage" name="welcomeMessage" 
+                               value="<%= settings.welcomeMessage %>">
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/dashboard" class="btn-secondary">Retour</a>
+                        <button type="submit" class="btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="config-section">
+                <h3>Code d'intégration</h3>
+                <p>Copiez ce code dans votre site web pour intégrer le chatbot :</p>
+                <div class="code-block">
+                    <pre><code><%= embedCode %></code></pre>
+                    <button class="btn-secondary copy-btn" data-clipboard-text="<%= embedCode %>">
+                        Copier
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+<script>
+    new ClipboardJS('.copy-btn');
+</script>
+
+<%- include('../layouts/footer') %>

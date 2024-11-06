@@ -1,0 +1,52 @@
+<%- include('layouts/header') %>
+
+<main class="container">
+    <div class="auth-form">
+        <h2>Connexion</h2>
+        
+        <% if (locals.error) { %>
+            <div class="alert error">
+                <%= error %>
+            </div>
+        <% } %>
+        
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required 
+                    autocomplete="email"
+                    class="form-control"
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    required 
+                    autocomplete="current-password"
+                    class="form-control"
+                >
+            </div>
+            
+            <button type="submit" class="btn-primary w-full">Se connecter</button>
+            
+            <div class="text-center mt-4">
+                <p>
+                    Pas encore de compte ? 
+                    <a href="/register" class="text-primary hover:text-primary-dark">
+                        S'inscrire
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%- include('layouts/footer') %>

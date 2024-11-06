@@ -1,0 +1,31 @@
+<%- include('../layouts/header') %>
+
+<main class="container">
+    <div class="hero">
+        <h1>Assistant Juridique - Code Malagasy</h1>
+        <p>Posez vos questions sur le droit et la législation malgache</p>
+    </div>
+
+    <div class="legal-chat-container">
+        <div class="info-section">
+            <h2>À propos de cet assistant</h2>
+            <p>Cet assistant juridique est spécialisé dans le droit malgache et peut vous aider à comprendre :</p>
+            <ul>
+                <li>Les textes de lois</li>
+                <li>Les procédures juridiques</li>
+                <li>Les droits et obligations</li>
+                <li>Les démarches administratives</li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+<script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+    Chatbot.init({
+        chatflowid: "1145dca6-debe-4456-af2e-39b3cc699632",
+        apiHost: "https://flowise.iamarketings.fr",
+    })
+</script>
+
+<%- include('../layouts/footer') %>
